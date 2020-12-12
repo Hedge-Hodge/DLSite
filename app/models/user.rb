@@ -7,4 +7,7 @@ class User < ApplicationRecord
     too_long: "%{count} characters is the maximum allowed" }
   validates :email, confirmation: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  has_many :creditors
+  has_many :debtors
 end

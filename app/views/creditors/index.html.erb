@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Creditors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Transaction</th>
+      <th>Confirmed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @creditors.each do |creditor| %>
+      <tr>
+        <td><%= creditor.user %></td>
+        <td><%= creditor.transaction_id %></td>
+        <td><%= creditor.confirmed %></td>
+        <td><%= link_to 'Show', creditor %></td>
+        <td><%= link_to 'Edit', edit_creditor_path(creditor) %></td>
+        <td><%= link_to 'Destroy', creditor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Creditor', new_creditor_path %>

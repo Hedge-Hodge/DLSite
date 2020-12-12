@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @debtor.user_id %>
+</p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @debtor.transaction_id %>
+</p>
+
+<p>
+  <strong>Sum:</strong>
+  <%= @debtor.sum %>
+</p>
+
+<p>
+  <strong>Confirmed:</strong>
+  <%= @debtor.confirmed %>
+</p>
+
+<%= link_to 'Edit', edit_debtor_path(@debtor) %> |
+<%= link_to 'Back', debtors_path %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :creditors
+  resources :debtors
   resources :members
   resources :groups
   resources :transactions
