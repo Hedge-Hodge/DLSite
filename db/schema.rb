@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_172843) do
+ActiveRecord::Schema.define(version: 2020_12_12_211626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 2020_12_12_172843) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["transaction_id"], name: "index_creditors_on_transaction_id"
     t.index ["user_id"], name: "index_creditors_on_user_id"
+  end
+
+  create_table "deals", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "credit_sum", precision: 8, scale: 2
   end
 
   create_table "debtors", force: :cascade do |t|
@@ -51,13 +58,6 @@ ActiveRecord::Schema.define(version: 2020_12_12_172843) do
     t.index ["group_id"], name: "index_members_on_group_id"
   end
 
-  create_table "transactions", force: :cascade do |t|
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.decimal "credit_sum", precision: 8, scale: 2
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "given_name"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2020_12_12_172843) do
     t.integer "transactions", default: [], array: true
   end
 
-  add_foreign_key "creditors", "transactions"
-  add_foreign_key "debtors", "transactions"
+  add_foreign_key "creditors", "deals", column: "transaction_id"
+  add_foreign_key "debtors", "deals", column: "transaction_id"
   add_foreign_key "debtors", "users"
   add_foreign_key "members", "groups"
 end
