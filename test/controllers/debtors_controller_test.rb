@@ -17,7 +17,7 @@ class DebtorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create debtor" do
     assert_difference('Debtor.count') do
-      post debtors_url, params: { debtor: { confirmed: @debtor.confirmed, sum: @debtor.sum, transaction_id: @debtor.transaction_id, user_id: @debtor.user_id } }
+      post debtors_url, params: { debtor: {  } }
     end
 
     assert_redirected_to debtor_url(Debtor.last)
@@ -34,7 +34,7 @@ class DebtorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update debtor" do
-    patch debtor_url(@debtor), params: { debtor: { confirmed: @debtor.confirmed, sum: @debtor.sum, transaction_id: @debtor.transaction_id, user_id: @debtor.user_id } }
+    patch debtor_url(@debtor), params: { debtor: {  } }
     assert_redirected_to debtor_url(@debtor)
   end
 

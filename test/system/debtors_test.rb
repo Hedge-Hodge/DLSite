@@ -14,10 +14,6 @@ class DebtorsTest < ApplicationSystemTestCase
     visit debtors_url
     click_on "New Debtor"
 
-    check "Confirmed" if @debtor.confirmed
-    fill_in "Sum", with: @debtor.sum
-    fill_in "Transaction", with: @debtor.transaction_id
-    fill_in "User", with: @debtor.user_id
     click_on "Create Debtor"
 
     assert_text "Debtor was successfully created"
@@ -28,10 +24,6 @@ class DebtorsTest < ApplicationSystemTestCase
     visit debtors_url
     click_on "Edit", match: :first
 
-    check "Confirmed" if @debtor.confirmed
-    fill_in "Sum", with: @debtor.sum
-    fill_in "Transaction", with: @debtor.transaction_id
-    fill_in "User", with: @debtor.user_id
     click_on "Update Debtor"
 
     assert_text "Debtor was successfully updated"

@@ -10,52 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_211626) do
+ActiveRecord::Schema.define(version: 2020_12_13_163047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "creditors", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "transaction_id", null: false
+    t.bigint "deal_id", null: false
     t.boolean "confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["transaction_id"], name: "index_creditors_on_transaction_id"
+    t.index ["deal_id"], name: "index_creditors_on_deal_id"
     t.index ["user_id"], name: "index_creditors_on_user_id"
   end
 
   create_table "deals", force: :cascade do |t|
     t.text "description"
+    t.decimal "credit_sum", precision: 8, scale: 2
+    t.boolean "confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "credit_sum", precision: 8, scale: 2
   end
 
   create_table "debtors", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "transaction_id", null: false
+    t.bigint "deal_id", null: false
     t.decimal "sum", precision: 8, scale: 2
     t.boolean "confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["transaction_id"], name: "index_debtors_on_transaction_id"
+    t.index ["deal_id"], name: "index_debtors_on_deal_id"
     t.index ["user_id"], name: "index_debtors_on_user_id"
   end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "members", force: :cascade do |t|
-    t.string "user"
-    t.string "references"
+    t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_members_on_group_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,11 +67,11 @@ ActiveRecord::Schema.define(version: 2020_12_12_211626) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "transactions", default: [], array: true
   end
 
-  add_foreign_key "creditors", "deals", column: "transaction_id"
-  add_foreign_key "debtors", "deals", column: "transaction_id"
+  add_foreign_key "creditors", "deals"
+  add_foreign_key "debtors", "deals"
   add_foreign_key "debtors", "users"
   add_foreign_key "members", "groups"
+  add_foreign_key "members", "users"
 end

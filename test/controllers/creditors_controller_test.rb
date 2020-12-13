@@ -17,7 +17,7 @@ class CreditorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create creditor" do
     assert_difference('Creditor.count') do
-      post creditors_url, params: { creditor: { confirmed: @creditor.confirmed, transaction_id: @creditor.transaction_id, user: @creditor.user } }
+      post creditors_url, params: { creditor: {  } }
     end
 
     assert_redirected_to creditor_url(Creditor.last)
@@ -34,7 +34,7 @@ class CreditorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update creditor" do
-    patch creditor_url(@creditor), params: { creditor: { confirmed: @creditor.confirmed, transaction_id: @creditor.transaction_id, user: @creditor.user } }
+    patch creditor_url(@creditor), params: { creditor: {  } }
     assert_redirected_to creditor_url(@creditor)
   end
 

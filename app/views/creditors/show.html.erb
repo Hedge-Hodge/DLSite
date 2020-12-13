@@ -1,19 +1,4 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @creditor.user %>
-</p>
-
-<p>
-  <strong>Transaction:</strong>
-  <%= @creditor.transaction_id %>
-</p>
-
-<p>
-  <strong>Confirmed:</strong>
-  <%= @creditor.confirmed %>
-</p>
-
 <%= link_to 'Edit', edit_creditor_path(@creditor) %> |
 <%= link_to 'Back', creditors_path %>

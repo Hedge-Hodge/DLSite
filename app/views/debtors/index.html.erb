@@ -5,10 +5,6 @@
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Transaction</th>
-      <th>Sum</th>
-      <th>Confirmed</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +12,6 @@
   <tbody>
     <% @debtors.each do |debtor| %>
       <tr>
-        <td><%= debtor.user_id %></td>
-        <td><%= debtor.transaction_id %></td>
-        <td><%= debtor.sum %></td>
-        <td><%= debtor.confirmed %></td>
         <td><%= link_to 'Show', debtor %></td>
         <td><%= link_to 'Edit', edit_debtor_path(debtor) %></td>
         <td><%= link_to 'Destroy', debtor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
