@@ -1,4 +1,4 @@
-<%= form_with(model: debtor, local: true) do |form| %>
+<%= form_with(model: [@deal, debtor], local: true) do |form| %>
   <% if debtor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(debtor.errors.count, "error") %> prohibited this debtor from being saved:</h2>
@@ -10,6 +10,11 @@
       </ul>
     </div>
   <% end %>
+
+  <div class="field">
+    <%= form.label :sum %>
+    <%= form.text_area :sum %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

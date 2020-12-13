@@ -10,5 +10,12 @@
   <%= @deal.credit_sum %>
 </p>
 
+<% if @deal.debtors.any? %>
+  <%= render @deal.debtors %>
+<% end %>
+
+<h2>Add a debtor:</h2>
+<%= render 'debtors/form' %>
+
 <%= link_to 'Edit', edit_deal_path(@deal) %> |
 <%= link_to 'Back', deals_path %>
