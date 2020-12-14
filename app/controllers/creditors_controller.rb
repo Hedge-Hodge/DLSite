@@ -1,11 +1,11 @@
 class CreditorsController < ApplicationController
   before_action :set_creditor, only: [:show, :edit, :update, :destroy]
-  before_action :get_deal
+  #before_action :get_deal
 
   # GET /creditors
   # GET /creditors.json
   def index
-    @creditors = @Deal.creditors
+    @creditors = Creditor.all
   end
 
   # GET /creditors/1
@@ -15,7 +15,7 @@ class CreditorsController < ApplicationController
 
   # GET /creditors/new
   def new
-    @creditor = @Deal.creditor.build
+    @creditor = Creditor.new
   end
 
   # GET /creditors/1/edit
@@ -25,7 +25,7 @@ class CreditorsController < ApplicationController
   # POST /creditors
   # POST /creditors.json
   def create
-    @creditor = @Deal.creditor.build(creditor_params)
+    @creditor = Creditor.new(creditor_params)
 
     respond_to do |format|
       if @creditor.save
@@ -65,7 +65,7 @@ class CreditorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_creditor
-      @creditor = Deal.creditor.find(params[:id])
+      @creditor = Creditor.find(params[:id])
     end
 
     def get_deal
@@ -74,6 +74,6 @@ class CreditorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def creditor_params
-      params.fetch(:creditor, {})
+      params.require(:debtor).permit(:deal_id, :user_id)
     end
 end

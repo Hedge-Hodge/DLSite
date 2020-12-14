@@ -13,31 +13,32 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description %><br />
   </div>
 
   <div class="field">
     <%= form.label :credit_sum %>
-    <%= form.text_field :credit_sum %>
+    <%= form.text_field :credit_sum %><br />
   </div>
 
-  <div class="field">
+  <% @deal.build_creditor %>
+  <% @deal.debtors.build %>
 
+  <div class="field">
     <% form.fields_for :creditor do |f| %>
-      <%= f.label :user_id %>
-      <%= f.text_field :user_id %>
+      <%= f.label :user_id, "Username" %>
+      <%= f.text_field :user_id %><br />
     <% end %>
-
   </div>
 
   <div class="field">
-
     <% form.fields_for :debtors do |f| %>
       <%= render 'debtor_fields', f: f %>
     <% end %>
-
-  <%= link_to_add_fields "Add Debtor", form, :debtors %>
   </div>
+  <br />
+  <%= link_to_add_fields "Add Debtor", form, :debtors %> <br />
+
 
 
   <div class="actions">

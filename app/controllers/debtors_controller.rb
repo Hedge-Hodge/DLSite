@@ -78,6 +78,6 @@ class DebtorsController < ApplicationController
     end
     # Only allow a list of trusted parameters through.
     def debtor_params
-      params.require(:debtor).permit(:deal_id, :user_id)
+      params.require(:debtor).permit(:deal_id, :user_id, :sum)
     end
 end
