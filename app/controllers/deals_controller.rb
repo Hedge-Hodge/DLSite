@@ -74,7 +74,7 @@ class DealsController < ApplicationController
       params.require(:deal).permit(
         :description, :credit_sum,
       creditor_attributes: [ :id, :user_id ],
-      debtor_attributes: [:id, :user_id, :sum]
+      debtors_attributes: [:id, :user_id, :sum]
     )
     end
 end
