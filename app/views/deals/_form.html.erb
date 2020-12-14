@@ -24,7 +24,8 @@
   <div class="field">
 
     <% form.fields_for :creditor do |f| %>
-      <%= render 'creditor_fields', f: f %>
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id %>
     <% end %>
 
   </div>
@@ -45,6 +46,14 @@
 <% end %>
 
 <script>
+
+  $('form').on('click', '.remove_fields', function(event) {
+    console.log('removed!')
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('fieldset').hide();
+    return event.preventDefault();
+  });
+
   $('form').on('click', '.add_fields', function(event) {
     console.log('clicked!')
     var regexp, time;
@@ -52,5 +61,5 @@
     regexp = new RegExp($(this).data('id'), 'g');
     $(this).before($(this).data('fields').replace(regexp, time));
     return event.preventDefault();
-  })
+  });
 </script>

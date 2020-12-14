@@ -1,12 +1,12 @@
 class DebtorsController < ApplicationController
   before_action :set_debtor, only: [:show, :edit, :update, :destroy]
-  before_action :get_deal
-  before_action :get_user, only: [:show, :edit, :update, :destroy]
+  #before_action :get_deal
+  #before_action :get_user, only: [:show, :edit, :update, :destroy]
 
   # GET /debtors
   # GET /debtors.json
   def index
-    @debtors = @deal.debtors
+    @debtors = Debtor.all
   end
 
   # GET /debtors/1
@@ -16,7 +16,7 @@ class DebtorsController < ApplicationController
 
   # GET /debtors/new
   def new
-    @debtor = @deal.debtors.build
+    @debtor = Debtor.new
   end
 
   # GET /debtors/1/edit
@@ -26,11 +26,11 @@ class DebtorsController < ApplicationController
   # POST /debtors
   # POST /debtors.json
   def create
-    @debtor = @deal.debtors.build(debtor_params)
+    @debtor = Debtor.new(debtor_params)
 
     respond_to do |format|
       if @debtor.save
-        format.html { redirect_to deal_debtors_path(@deal), notice: 'Debtor was successfully created.' }
+        format.html { redirect_to @debtor, notice: 'Debtor was successfully created.' }
         format.json { render :show, status: :created, location: @debtor }
       else
         format.html { render :new }
@@ -66,7 +66,7 @@ class DebtorsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_debtor
-      @debtor = Deal.debtors.find(params[:id])
+      @debtor = Debtor.find(params[:id])
     end
 
     def get_deal
@@ -78,6 +78,6 @@ class DebtorsController < ApplicationController
     end
     # Only allow a list of trusted parameters through.
     def debtor_params
-      params.fetch(:debtor, {})
+      params.require(:debtor).permit(:deal_id, :user_id)
     end
 end
