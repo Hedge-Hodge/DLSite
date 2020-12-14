@@ -10,12 +10,14 @@
   <%= @deal.credit_sum %>
 </p>
 
-<% if @deal.debtors.any? %>
-  <%= render @deal.debtors %>
+<p>
+  <strong> Debtors: </strong>
+</p>
+<% @deal.debtors.each do |debtor| %>
+  <p>
+    <%= debtor.user_id %>
+    <%= debtor.sum %>
+  </p>
 <% end %>
-
-<h2>Add a debtor:</h2>
-<%= render 'debtors/form' %>
-
 <%= link_to 'Edit', edit_deal_path(@deal) %> |
 <%= link_to 'Back', deals_path %>

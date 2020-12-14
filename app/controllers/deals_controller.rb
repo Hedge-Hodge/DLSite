@@ -15,6 +15,8 @@ class DealsController < ApplicationController
   # GET /deals/new
   def new
     @deal = Deal.new
+    @deal.build_creditor
+    @deal.debtors.build
   end
 
   # GET /deals/1/edit
@@ -69,6 +71,10 @@ class DealsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def deal_params
-      params.require(:deal).permit(:description, :credit_sum)
+      params.require(:deal).permit(
+        :description, :credit_sum,
+      creditor_attributes: [ :id, :user_id ],
+      debtor_attributes: [:id, :user_id, :sum]
+    )
     end
 end
