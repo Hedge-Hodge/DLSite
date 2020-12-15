@@ -6,7 +6,10 @@
   <thead>
     <tr>
       <th>Description</th>
-      <th>Credit sum</th>
+      <th>Creditor Username</th>
+      <th>Credit Sum</th>
+      <th>Debtor Username</th>
+      <th>Debtor Sum</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +18,12 @@
     <% @deals.each do |deal| %>
       <tr>
         <td><%= deal.description %></td>
+        <td><%= deal.creditor.user_id %></td>
         <td><%= deal.credit_sum %></td>
+        <% deal.debtors.each do |debtor| %>
+          <td><%= debtor.user_id %></td>
+          <td><%= debtor.sum %></td>
+        <% end %>
         <td><%= link_to 'Show', deal %></td>
         <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
         <td><%= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

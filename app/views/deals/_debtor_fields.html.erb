@@ -1,6 +1,8 @@
-<%= f.label :user_id, "Debtor username" %>
-<%= f.text_field :user_id %><br />
-<%= f.label :sum, "Sum owed" %>
-<%= f.text_field :sum %>
-<%= f.hidden_field :_destroy %>
-<%= link_to "Remove", "#", class: 'remove-fields' %><br />
+<p>
+  <%= f.label :user_id, "Debtor Username"%>
+  <%= f.text_field :user_id %>
+  <%= f.label :sum, "Sum Owed"%>
+  <%= f.text_field :sum %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "Remove", "#", class: 'remove-fields' %>
+</p>

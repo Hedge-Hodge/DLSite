@@ -5,7 +5,7 @@ class CreditorsController < ApplicationController
   # GET /creditors
   # GET /creditors.json
   def index
-    @creditors = Creditor.all
+    @creditor = Creditor.all
   end
 
   # GET /creditors/1
@@ -29,7 +29,7 @@ class CreditorsController < ApplicationController
 
     respond_to do |format|
       if @creditor.save
-        format.html { redirect_to deal_creditor_path(@deal), notice: 'Creditor was successfully created.' }
+        format.html { redirect_to @creditor, notice: 'Creditor was successfully created.' }
         format.json { render :show, status: :created, location: @creditor }
       else
         format.html { render :new }
@@ -74,6 +74,6 @@ class CreditorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def creditor_params
-      params.require(:debtor).permit(:deal_id, :user_id)
+      params.require(:creditor).permit(:deal_id, :user_id)
     end
 end

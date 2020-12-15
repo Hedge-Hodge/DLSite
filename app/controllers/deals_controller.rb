@@ -27,6 +27,8 @@ class DealsController < ApplicationController
   # POST /deals.json
   def create
     @deal = Deal.new(deal_params)
+    #@deal.build_creditor(creditor_attributes)
+    #@deal.debtors.build(debtors_attributes)
 
     respond_to do |format|
       if @deal.save

@@ -1,3 +1,18 @@
 // Place all the styles related to the Deals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.nested_form{
+  float: left;
+  width: 60%;
+  display: block
+}
+
+.nested_form_label{
+  text-align: left;
+  padding-right: 25px;
+}
+
+.nested_form_fields{
+  align-items: left;
+  padding-left: 50px;
+}
