@@ -28,7 +28,17 @@
 
   <div class="field">
     <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, 'Password:' %>
+    <%= form.password_field :password, size: 40 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, 'Confirm:' %>
+    <%= form.password_field :password_confirmation, id: :user_password_confirmation, size: 40 %>
   </div>
 
   <div class="actions">
