@@ -4,6 +4,11 @@
   <strong>Description:</strong>
   <%= @deal.description %>
 </p>
+<% @user = User.find(@deal.creditor.user_id) %>
+<p>
+  <strong>Creditor:</strong>
+  <%= @user.username %>
+</p>
 
 <p>
   <strong>Credit sum:</strong>
@@ -13,11 +18,23 @@
 <p>
   <strong> Debtors: </strong>
 </p>
-<% @deal.debtors.each do |debtor| %>
-  <p>
-    <%= debtor.user_id %>
-    <%= debtor.sum %>
-  </p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th> Username: </th>
+      <th> Sum: </th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @deal.debtors.each do |debtor| %>
+    <tr>
+      <% @user = User.find(debtor.user_id) %>
+      <td><%= @user.username %></td>
+      <td><%= debtor.sum %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 <%= link_to 'Edit', edit_deal_path(@deal) %> |
 <%= link_to 'Back', deals_path %>

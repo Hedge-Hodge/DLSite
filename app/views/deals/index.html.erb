@@ -2,14 +2,30 @@
 
 <h1>Deals</h1>
 
+
+
 <table>
   <thead>
     <tr>
       <th>Description</th>
       <th>Creditor Username</th>
       <th>Credit Sum</th>
-      <th>Debtor Username</th>
-      <th>Debtor Sum</th>
+      <% most_debtors_id = 0 %>
+      <% most_debtors = 0 %>
+      <% @deals.each do |deal| %>
+        <% counter = 0 %>
+        <% deal.debtors.each do |debtor| %>
+          <% counter += 1 %>
+        <% end %>
+        <% if counter > most_debtors %>
+          <% most_debtors = counter %>
+          <% most_debtors_id = deal.id %>
+        <% end %>
+      <% end %>
+      <% most_debtors.times do |i| %>
+        <th>Debtor <%= i + 1 %> Username</th>
+        <th>Debtor <%= i + 1 %> Sum</th>
+      <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,11 +34,19 @@
     <% @deals.each do |deal| %>
       <tr>
         <td><%= deal.description %></td>
-        <td><%= deal.creditor.user_id %></td>
+        <% @user = User.find(deal.creditor.user_id) %>
+        <td><%= @user.username %></td>
         <td><%= deal.credit_sum %></td>
+        <% remaining_debtors = most_debtors %>
         <% deal.debtors.each do |debtor| %>
-          <td><%= debtor.user_id %></td>
+          <% remaining_debtors -= 1 %>
+          <% @user = User.find(debtor.user_id) %>
+          <td><%= @user.username %></td>
           <td><%= debtor.sum %></td>
+        <% end %>
+        <% remaining_debtors.times do |a| %>
+          <td></td>
+          <td></td>
         <% end %>
         <td><%= link_to 'Show', deal %></td>
         <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
