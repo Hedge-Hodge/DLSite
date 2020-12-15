@@ -1,2 +1,73 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<h1><strong>Dashboard</strong></h1>
+<p>"Hello again <%= @user.given_name %>"</p>
+
+<% current_user_id = @user.id %>
+
+<div class="dashboard_creditors">
+  <p>
+    <strong>Deals where you are owed money</strong><br>
+  </p>
+  <p>
+    <% creditor_list = Creditor.where(user_id: current_user_id) %>
+    <% creditor_list.each do |creditor| %>
+      <% @deal = Deal.find(creditor.deal_id) %>
+      You are owed a total of €<%= @deal.credit_sum %>
+      <table>
+        <thead>
+          <th> Debtor <th>
+          <th> Owes you <th>
+        </thead>
+        <tbody>
+          <% @deal.debtors.each do |debtor| %>
+            <tr>
+            <% current_debtor = User.find(debtor.user_id) %>
+            <td><%= current_debtor.username %></td>
+            <td>€<%= debtor.sum %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+    <% end %>
+  </p>
+</div>
+
+<div class="dashboard_debtors">
+  <p>
+    <strong>Deals where you owe money</strong>
+  </p>
+  <p>
+    <% debtor_list = Debtor.where(user_id: current_user_id) %>
+    <% debtor_list.each do |debtor| %>
+      <% @deal = Deal.find(debtor.deal_id) %>
+      <% current_creditor = User.find(@deal.creditor.user_id) %>
+      You owe €<%= debtor.sum %> to <%= current_creditor.username %>
+      <br>
+      <br>
+      <% total_debtors = 0 %>
+      <% @deal.debtors.each do |d| %>
+        <% total_debtors += 1 %>
+      <% end %>
+      <% if total_debtors > 1 %>
+        The following debtors in this deal also owe:
+        <table>
+          <thead>
+            <th>Debtor</th>
+            <th>Owes</th>
+          </thead>
+          <tbody>
+            <% @deal.debtors.each do |d| %>
+              <% if d.user_id != current_user_id %>
+                <tr>
+                  <% current_debtor = User.find(d.user_id) %>
+                  <td><%= current_debtor.username %></td>
+                  <td>€<%= d.sum %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  </p>
+</div>
