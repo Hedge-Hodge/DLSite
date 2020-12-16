@@ -1,3 +1,33 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.stuff{
+  h1 {
+    font-size: 1.99em;
+    line-height: 1.41em;
+    margin-bottom: 0.5em;
+    padding: 0;
+  }
+  text-align: left;
+  padding: 0em;
+   padding-left: 2em;
+   padding-bottom: 25px;
+  td, th {
+    padding: 0.25rem;
+  }
+}
+
+.btn {
+  border: 2px solid black;
+  background-color: lightgreen;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: black;
+  color: green;
+}
+.btn:hover {
+  background-color: #4CAF50;
+  color: white;
+}

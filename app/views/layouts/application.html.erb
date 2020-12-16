@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Spot Me: Distributed Ledger</title>
+    <title>Spot Me: Ledger on Rails</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,18 +11,17 @@
 
   <body>
     <header class="main">
-      <%= image_tag 'DLSite euro hand logo.png', alt: 'DL Site' %>
+      <%= image_tag 'Euro Hand.png'%>
       <h1><%= @page_title %></h1>
     </header>
     <section class="content">
       <nav class="side_nav">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/groups">Groups</a></li>
+          <li><a href="/dashboard">Home</a></li>
           <li><a href="/deals">Deals</a></li>
+          <li><a href="/groups">Groups</a></li>
           <li><a href="/history">History</a></li>
           <li><a href="/settings">Settings</a></li>
-          <li><a href="/contact">Contact</a></li>
         </ul>
       </nav>
       <main class='<%= controller.controller_name %>'>

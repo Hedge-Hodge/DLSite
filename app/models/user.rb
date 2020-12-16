@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_secure_password
+  has_many :creditors
+  has_many :debtors
   validates :username, :given_name, :family_name, :email, presence: true
   validates :username, :email, uniqueness: true
   validates :username,  length: { maximum: 25,
@@ -7,7 +10,4 @@ class User < ApplicationRecord
     too_long: "%{count} characters is the maximum allowed" }
   validates :email, confirmation: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  has_secure_password
-  has_many :creditors
-  has_many :debtors
 end
